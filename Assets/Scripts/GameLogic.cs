@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,15 @@ public class GameLogic : MonoBehaviour
     public Text questionText;
     public Text rightButtonText;
     public Text wrongButtonText;
+    public Button rightButton;
+    public Button wrongButton;
+
+    private int questionSet;
+    private int buttonChoiceR;
+    private int buttonChoiceL;
+
+    private float timer;
+    [SerializeField] private float nextQuestionSpawner;
 
     public string[] questions =
     {
@@ -35,23 +45,7 @@ public class GameLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //int currentQuestion = Random.Range(0, questions.Length);
-        
-        //int buttonChoiceR = Random.Range(0, 2);
-        //int buttonChoiceL = Random.Range(0, 2);
 
-        /*if (buttonChoiceR == 0)
-        {
-            int questionSet = Random.Range(0, 3);
-            
-        }
-        else
-        {
-            int questionSet = Random.Range(0, 3);
-            questionText.text = questions[questionSet];
-            wrongButtonText.text = rightAnswers[questionSet];
-            rightButtonText.text = wrongAnswers[questionSet];
-        }*/
     }
 
     // Update is called once per frame
@@ -59,5 +53,41 @@ public class GameLogic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene(SceneManager.GetActiveScene().name);  }
         
+        
+
+        if (timer < nextQuestionSpawner)
+        {
+            timer += Time.deltaTime;
+        }
+        else if (timer >=  nextQuestionSpawner)
+        {
+            wrongChoice();
+        }
+
+        if (buttonChoiceR == 0)
+        {
+            createQuestionSet();
+        }
+        else
+        {
+            createQuestionSet();
+        }
+    }
+
+    public void createQuestionSet()
+    {
+        questionText.text = questions[questionSet];
+        wrongButtonText.text = rightAnswers[questionSet];
+        rightButtonText.text = wrongAnswers[questionSet];
+    }
+
+    public void rightChoice()
+    {
+        SceneManager.LoadScene("Win");
+    }
+
+    public void wrongChoice()
+    {
+        SceneManager.LoadScene("Lose");
     }
 }
