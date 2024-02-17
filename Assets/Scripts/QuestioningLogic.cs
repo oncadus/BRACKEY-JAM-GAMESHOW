@@ -7,6 +7,10 @@ using UnityEngine.UIElements;
 
 public class QuestioningLogic : MonoBehaviour
 {
+    public float time = 15;
+    private float percentleft = 1;
+
+
     Question[] questions =
     {
         new Question("Does 3 + 5 equal to 9", false),
@@ -15,6 +19,27 @@ public class QuestioningLogic : MonoBehaviour
     };
 
     Question currentQuestion;
+
+    private void Start()
+    {
+        StartCoroutine(StartTimer());
+    }
+
+    IEnumerator StartTimer()
+    {
+        VisualElement timer = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("Timer");
+
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            percentleft = time / 15;
+            timer.style.scale = new Scale(new Vector3(percentleft, 1, 01));
+            yield return null;
+        }
+
+        SceneManager.LoadScene("Lose");
+    }
+
 
     private void OnEnable()
     {
@@ -37,8 +62,30 @@ public class QuestioningLogic : MonoBehaviour
         };
 
 
+        // These are hover events
+        falseButton.RegisterCallback<MouseOverEvent>((type) =>
+        {
+            falseButton.style.opacity = 0.5f;
+        });
+
+        falseButton.RegisterCallback<MouseOutEvent>((type) =>
+        {
+            falseButton.style.opacity = 1f;
+        });
+
+        trueButton.RegisterCallback<MouseOverEvent>((type) =>
+        {
+            trueButton.style.opacity = 0.5f;
+        });
+
+        trueButton.RegisterCallback<MouseOutEvent>((type) =>
+        {
+            trueButton.style.opacity = 1f;
+        });
+
+
         // Assign first question
-        currentQuestion = questions[0];
+        currentQuestion = questions[2];
         questionLabel.text = currentQuestion.question;
 
     }
