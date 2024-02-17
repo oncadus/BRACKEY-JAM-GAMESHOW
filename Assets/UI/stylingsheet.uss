@@ -1,0 +1,22 @@
+.question-button {
+    opacity: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: auto;
+    position: relative;
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+    flex-wrap: nowrap;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgb(185, 207, 238);
+    color: rgb(9, 30, 53);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    align-self: auto;
+    padding-right: 50px;
+    padding-left: 50px;
+}

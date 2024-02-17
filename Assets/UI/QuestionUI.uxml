@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/stylingsheet.uss?fileID=7433441132597879392&amp;guid=34f9f8b6ea97fac4fbe03307b0fb3575&amp;type=3#stylingsheet" />
+    <ui:VisualElement style="flex-grow: 1; justify-content: space-between; align-self: auto; flex-direction: row; text-overflow: clip; white-space: normal; -unity-text-align: upper-left; margin-top: 24px; margin-right: 24px; margin-bottom: 24px; margin-left: 24px; padding-right: 0; padding-left: 0;">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="False" class="question-button" style="transform-origin: left; background-color: rgb(212, 99, 99);" />
+        <ui:Label tabindex="-1" text="Filler text for the question at hand :33" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Question" style="flex-direction: column; align-self: flex-start; justify-content: flex-start; font-size: 25px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="True" class="question-button" style="transform-origin: right; background-color: rgb(135, 212, 99);" />
+    </ui:VisualElement>
+</ui:UXML>

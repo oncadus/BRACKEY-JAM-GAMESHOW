@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -19,32 +20,19 @@ public class GameLogic : MonoBehaviour
     private int buttonChoiceL;
 
     private float timer;
-    [SerializeField] private float nextQuestionSpawner;
+    [SerializeField] private float timelimit;
 
-    public string[] questions =
+    public Question[] questions =
     {
-        "What is 1 + 2?",
-        "Who was in paris?",
-        "Is Jbone a stupid big dumb face?"
-    };
-
-    public string[] rightAnswers =
-    {
-        "3",
-        "African americans",
-        "LOL!!!!!"
-    };
-
-    public string[] wrongAnswers =
-    {
-        "4",
-        "Fellas",
-        "noooo :<"
+        new Question("Does 3 + 5 equal to 9", false),
+        new Question("Is the eifel tower in paris?", true),
+        new Question("Jbone is a stupid big dumb face", true) // teehee
     };
 
     // Start is called before the first frame update
     void Start()
     {
+
 
     }
 
@@ -55,30 +43,36 @@ public class GameLogic : MonoBehaviour
         
         
 
-        if (timer < nextQuestionSpawner)
+        if (timer < timelimit)
         {
             timer += Time.deltaTime;
         }
-        else if (timer >=  nextQuestionSpawner)
+        else if (timer >= timelimit)
         {
             wrongChoice();
         }
 
-        if (buttonChoiceR == 0)
-        {
-            createQuestionSet();
-        }
-        else
-        {
-            createQuestionSet();
-        }
+
+        Debug.Log(buttonChoiceR);
     }
 
     public void createQuestionSet()
     {
-        questionText.text = questions[questionSet];
-        wrongButtonText.text = rightAnswers[questionSet];
-        rightButtonText.text = wrongAnswers[questionSet];
+        questionText.text = questions[0].question;
+        wrongButtonText.text = "False";
+        rightButtonText.text = "True";
+    }
+
+    public void CheckGivenAnswer(bool answer)
+    {
+        if (answer == questions[0].answer)
+        {
+            rightChoice();
+        }
+        else
+        {
+            wrongChoice();
+        }
     }
 
     public void rightChoice()
